@@ -1,5 +1,10 @@
-<html>
-<body>
-<h2>Hello World!</h2>
-</body>
+<%@ page contentType="text/html; charset=UTF-8" %>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="0;URL=http://localhost:8080/cinema/place.do" />
+    <title>Перенаправление</title>
+</head>
 </html>
