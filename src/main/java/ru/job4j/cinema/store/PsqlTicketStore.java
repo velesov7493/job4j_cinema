@@ -21,6 +21,10 @@ public class PsqlTicketStore implements TicketStore {
         pool = AppSettings.getConnectionPool();
     }
 
+    public static TicketStore getInstance() {
+        return INSTANCE;
+    }
+
     private boolean create(Ticket value) {
         boolean result = false;
         String query =
