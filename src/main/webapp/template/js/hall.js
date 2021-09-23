@@ -13,8 +13,10 @@ $(document).ready(function () {
 });
 
 $('#hall th, #hall td').click(function () {
-    $('#hall td').removeClass('selected');
-    $(this).addClass('selected');
+    if (!$(this).hasClass('occupied')) {
+        $('#hall td').removeClass('selected');
+        $(this).addClass('selected');
+    }
 });
 
 $('#choose-place').submit(function () {
@@ -23,4 +25,5 @@ $('#choose-place').submit(function () {
     let n = cid.split('c');
     $('#iRow').val(n[0]);
     $('#iCol').val(n[1]);
+    return !isNaN(n[0]) && !isNaN(n[1]);
 });
