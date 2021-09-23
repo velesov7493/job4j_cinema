@@ -87,7 +87,7 @@ public class PsqlSessionStore implements Store<Integer, Session> {
     @Override
     public Session getById(Integer id) {
         Session result = null;
-        String query = "SELECT * FROM tj_tickets WHERE id=?;";
+        String query = "SELECT * FROM tz_sessions WHERE id=?;";
         try (
                 Connection cn = pool.getConnection();
                 PreparedStatement ps = cn.prepareStatement(query)

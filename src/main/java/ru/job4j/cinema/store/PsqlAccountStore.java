@@ -21,7 +21,7 @@ public class PsqlAccountStore implements Store<Integer, Account> {
         pool = AppSettings.getConnectionPool();
     }
 
-    private Store<Integer, Account> getInstance() {
+    public static Store<Integer, Account> getInstance() {
         return INSTANCE;
     }
 
