@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PsqlAccountStore implements Store<Integer, Account> {
+public class PsqlAccountStore implements AccountStore {
 
     private static final Logger LOG = LoggerFactory.getLogger(PsqlAccountStore.class.getName());
     private static final PsqlAccountStore INSTANCE = new PsqlAccountStore();
@@ -21,7 +21,7 @@ public class PsqlAccountStore implements Store<Integer, Account> {
         pool = AppSettings.getConnectionPool();
     }
 
-    public static Store<Integer, Account> getInstance() {
+    public static AccountStore getInstance() {
         return INSTANCE;
     }
 
@@ -116,7 +116,30 @@ public class PsqlAccountStore implements Store<Integer, Account> {
             LOG.error("Ошибка выполнения запроса: ", ex);
         }
         return result;
+    }
 
+    @Override
+    public Account getByPhone(String phone) {
+        Account result = null;
+        String query = "SELECT * FROM tz_accounts WHERE phone=?;";
+        try (
+                Connection cn = pool.getConnection();
+                PreparedStatement ps = cn.prepareStatement(query)
+        ) {
+            ps.setString(1, phone);
+            ResultSet it = ps.executeQuery();
+            if (it.next()) {
+                result = new Account();
+                result.setId(it.getInt("id"));
+                result.setName(it.getString("name"));
+                result.setEmail(it.getString("email"));
+                result.setPhone(it.getString("phone"));
+            }
+            it.close();
+        } catch (Exception ex) {
+            LOG.error("Ошибка выполнения запроса: ", ex);
+        }
+        return result;
     }
 
     @Override

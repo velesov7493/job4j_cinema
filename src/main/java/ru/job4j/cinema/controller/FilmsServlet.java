@@ -11,20 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class HallServlet extends HttpServlet {
+public class FilmsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
 
-        HttpSession s = req.getSession();
-
         Store<Integer, Session> store = PsqlSessionStore.getInstance();
-        int sessionId = (Integer) s.getAttribute("sessionId");
-        req.setAttribute("cinemaSession", store.getById(sessionId));
-        req.setAttribute("rows", 25);
-        req.setAttribute("cols", 20);
-        req.getRequestDispatcher("views/choosingPlace.jsp").forward(req, resp);
+        req.setAttribute("films", store.findAll());
+        req.getRequestDispatcher("views/choosingFilm.jsp").forward(req, resp);
     }
 
     @Override
@@ -33,8 +28,7 @@ public class HallServlet extends HttpServlet {
 
         req.setCharacterEncoding("UTF-8");
         HttpSession s = req.getSession();
-        s.setAttribute("row", Integer.parseInt(req.getParameter("nRow")));
-        s.setAttribute("col", Integer.parseInt(req.getParameter("nCol")));
-        resp.sendRedirect(req.getContextPath() + "/payment.do");
+        s.setAttribute("sessionId", Integer.parseInt(req.getParameter("nSession")));
+        resp.sendRedirect(req.getContextPath() + "/place.do");
     }
 }

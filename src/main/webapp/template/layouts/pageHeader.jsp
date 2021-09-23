@@ -11,9 +11,6 @@
     <link href="<%=request.getContextPath()%>/template/images/favicon.png" rel="shortcut icon" type="image/png">
     <script src="<%=request.getContextPath()%>/template/js/jquery.min.js"></script>
     <script src="<%=request.getContextPath()%>/template/js/bootstrap.min.js"></script>
-    <c:if test="${not empty pageScript}">
-        <script src="<%=request.getContextPath()%>/template/js/<c:out value="${pageScript}"/>"></script>
-    </c:if>
     <link href="<%=request.getContextPath()%>/template/css/main.css" rel="stylesheet">
 </head>
 <body>

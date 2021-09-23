@@ -3,10 +3,7 @@ package ru.job4j.cinema.controller;
 import ru.job4j.cinema.persistence.Account;
 import ru.job4j.cinema.persistence.Session;
 import ru.job4j.cinema.persistence.Ticket;
-import ru.job4j.cinema.store.PsqlAccountStore;
-import ru.job4j.cinema.store.PsqlSessionStore;
-import ru.job4j.cinema.store.PsqlTicketStore;
-import ru.job4j.cinema.store.Store;
+import ru.job4j.cinema.store.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,22 +31,25 @@ public class PaymentServlet extends HttpServlet {
         throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
-        Store<Integer, Account> accStore = PsqlAccountStore.getInstance();
+        AccountStore accStore = PsqlAccountStore.getInstance();
         Store<Integer, Ticket> ticketStore = PsqlTicketStore.getInstance();
         HttpSession s = req.getSession();
         Account user = new Account();
         user.setName(req.getParameter("nUserName"));
         user.setEmail(req.getParameter("nEmail"));
         user.setPhone(req.getParameter("nPhone"));
+        Ticket t = new Ticket();
+        t.setSessionId((Integer) s.getAttribute("sessionId"));
+        t.setRow((Integer) s.getAttribute("row"));
+        t.setCol((Integer) s.getAttribute("col"));
         accStore.save(user);
         if (user.getId() != 0) {
-            Ticket t = new Ticket();
             t.setAccountId(user.getId());
-            t.setSessionId((Integer) s.getAttribute("sessionId"));
-            t.setRow((Integer) s.getAttribute("row"));
-            t.setCol((Integer) s.getAttribute("col"));
-            ticketStore.save(t);
+        } else {
+            user = accStore.getByPhone(user.getPhone());
+            t.setAccountId(user.getId());
         }
-        resp.sendRedirect(req.getContextPath() + "/place.do");
+        ticketStore.save(t);
+        resp.sendRedirect(req.getContextPath() + "/film.do");
     }
 }

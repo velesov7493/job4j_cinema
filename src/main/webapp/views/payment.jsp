@@ -1,15 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<c:import url="../template/layouts/pageHeader.jsp">
-    <c:param name="pageTitle" value="Оплата" />
-</c:import>
+<c:set var="pageTitle" value="Оплата" />
+<%@ include file="../template/layouts/pageHeader.jsp" %>
 
 <div class="row">
-    <h3>Забронировано место на фильм &quot;<c:out value="${cinemaSession.filmName}"/>&quot;</h3>
-    <h3>Вы выбрали <c:out value="${row}"/> ряд <c:out value="${col}"/> место. К оплате : 500 рублей.</h3>
-</div>
-<div class="row">
     <div class="col-12">
+        <h3 class="text-center">Забронировано место на фильм &quot;<c:out value="${cinemaSession.filmName}"/>&quot;</h3>
+        <p>Вы выбрали <c:out value="${row}"/> ряд <c:out value="${col}"/> место.</p>
+        <p>К оплате : 500 рублей.</p>
         <form action="<c:url value="/payment.do"/>" method="post">
             <div class="form-group">
                 <label for="username">ФИО</label>
@@ -28,4 +26,4 @@
     </div>
 </div>
 
-<c:import url="../template/layouts/pageFooter.jsp" />
+<%@ include file="../template/layouts/pageFooter.jsp" %>

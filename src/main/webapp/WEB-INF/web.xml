@@ -16,6 +16,10 @@
     <servlet-name>PlacesServlet</servlet-name>
     <servlet-class>ru.job4j.cinema.controller.PlacesServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>FilmsServlet</servlet-name>
+    <servlet-class>ru.job4j.cinema.controller.FilmsServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>HallServlet</servlet-name>
     <url-pattern>/place.do</url-pattern>
@@ -27,5 +31,9 @@
   <servlet-mapping>
     <servlet-name>PlacesServlet</servlet-name>
     <url-pattern>/places</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FilmsServlet</servlet-name>
+    <url-pattern>/film.do</url-pattern>
   </servlet-mapping>
 </web-app>

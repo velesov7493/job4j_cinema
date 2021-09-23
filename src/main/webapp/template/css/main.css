@@ -154,7 +154,7 @@ table#hall {
     right: 0px;
     bottom: 0px;
     left: 0px;
-    border: 3px solid #E5E5E5;
+    border: 3px solid #6610f2;
 }
 
 #hall td.selected:after {
@@ -165,4 +165,20 @@ table#hall {
     bottom: 0px;
     left: 0px;
     border: 3px solid orange !important;
+}
+
+ul.filmList {
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.filmList li {
+    font-size: 24px;
+    border-bottom: 1px solid #888;
+    cursor: pointer;
+}
+
+.filmList li.active {
+    background-color: orange;
 }
