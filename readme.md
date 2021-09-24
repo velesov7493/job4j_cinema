@@ -3,5 +3,7 @@
 ![screenshot](images/screenshoot001.png)
 ## Выбор места в зале ##
 ![screenshot](images/screenshoot002.png)
+## Выбор места в зале с уже забронированными местами ##
+![screenshot](images/screenshoot004.png)
 ## "Оплата" ##
 ![screenshot](images/screenshoot003.png)
