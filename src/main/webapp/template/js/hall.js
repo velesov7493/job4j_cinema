@@ -1,15 +1,22 @@
-$(document).ready(function () {
+function reloadOccupiedPlaces() {
     $.ajax({
         type: 'GET',
         url: 'http://localhost:8080/cinema/places?sessionId='+$('#iSession').val(),
         dataType: 'json'
     }).done(function (data) {
-        for (var ticket of data) {
+        for (let ticket of data) {
             $('#cell-r' + ticket.row + 'c' + ticket.col).addClass('occupied');
         }
+        setTimeout(function () {
+            reloadOccupiedPlaces();
+        }, 10000);
     }).fail(function (err) {
         console.log(err);
     });
+}
+
+$(document).ready(function () {
+    reloadOccupiedPlaces();
 });
 
 $('#hall th, #hall td').click(function () {
