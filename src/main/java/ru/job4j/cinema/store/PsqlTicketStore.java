@@ -1,6 +1,7 @@
 package ru.job4j.cinema.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.job4j.cinema.AppSettings;
@@ -44,10 +45,12 @@ public class PsqlTicketStore implements TicketStore {
                 value.setId(keys.getInt(1));
                 result = value.getId() > 0;
             }
-        } catch (SQLIntegrityConstraintViolationException ex) {
-            LOG.error("Ошибка выполнения запроса: это место на этот сеанс уже занято; ", ex);
-        } catch (Exception ex) {
-            LOG.error("Ошибка выполнения запроса: ", ex);
+        } catch (SQLException ex) {
+            if (ex.getErrorCode() == 0) {
+                throw new IllegalStateException("Это место на этот сеанс уже занято.", ex);
+            } else {
+                LOG.error("Ошибка выполнения запроса [" + ex.getErrorCode() + "]:", ex);
+            }
         }
         return result;
     }
@@ -67,10 +70,12 @@ public class PsqlTicketStore implements TicketStore {
             ps.setInt(4, value.getCol());
             ps.setInt(5, value.getId());
             result = ps.executeUpdate() > 0;
-        } catch (SQLIntegrityConstraintViolationException ex) {
-            LOG.error("Ошибка выполнения запроса: это место на этот сеанс уже занято; ", ex);
-        } catch (Exception ex) {
-            LOG.error("Ошибка выполнения запроса: ", ex);
+        } catch (SQLException ex) {
+            if (ex.getErrorCode() == 0) {
+                throw new IllegalStateException("Это место на этот сеанс уже занято.", ex);
+            } else {
+                LOG.error("Ошибка выполнения запроса [" + ex.getErrorCode() + "]:", ex);
+            }
         }
         return result;
     }

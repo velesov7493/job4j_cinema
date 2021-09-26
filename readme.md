@@ -7,3 +7,5 @@
 ![screenshot](images/screenshoot004.png)
 ## "Оплата" ##
 ![screenshot](images/screenshoot003.png)
+## Если место уже забронировано ##
+![screenshot](images/screenshoot005.png)

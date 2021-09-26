@@ -49,7 +49,11 @@ public class PaymentServlet extends HttpServlet {
             user = accStore.getByPhone(user.getPhone());
             t.setAccountId(user.getId());
         }
-        ticketStore.save(t);
-        resp.sendRedirect(req.getContextPath() + "/film.do");
+        try {
+            ticketStore.save(t);
+            resp.sendRedirect(req.getContextPath() + "/film.do");
+        } catch (IllegalStateException ex) {
+            resp.sendError(409);
+        }
     }
 }

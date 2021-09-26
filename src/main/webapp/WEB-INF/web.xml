@@ -5,6 +5,10 @@
 <web-app>
   <display-name>Cinema web</display-name>
   <servlet>
+    <servlet-name>ErrorsServlet</servlet-name>
+    <servlet-class>ru.job4j.cinema.controller.ErrorsServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>HallServlet</servlet-name>
     <servlet-class>ru.job4j.cinema.controller.HallServlet</servlet-class>
   </servlet>
@@ -21,6 +25,10 @@
     <servlet-class>ru.job4j.cinema.controller.FilmsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
+    <servlet-name>ErrorsServlet</servlet-name>
+    <url-pattern>/error.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>HallServlet</servlet-name>
     <url-pattern>/place.do</url-pattern>
   </servlet-mapping>
@@ -36,4 +44,8 @@
     <servlet-name>FilmsServlet</servlet-name>
     <url-pattern>/film.do</url-pattern>
   </servlet-mapping>
+  <error-page>
+    <error-code>409</error-code>
+    <location>/error.do?code=409</location>
+  </error-page>
 </web-app>

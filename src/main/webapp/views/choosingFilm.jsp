@@ -4,7 +4,7 @@
 <c:set var="pageScript" value="film.js" />
 <%@ include file="../template/layouts/pageHeader.jsp" %>
 <div class="row">
-    <div class="col-4">
+    <div class="col-xl-4 col-lg-6 col-md-9 col-sm-12 h-center">
         <ul class="filmList">
             <c:forEach items="${films}" var="film">
             <li id="<c:out value="${film.id}"/>"><c:out value="${film.filmName}"/></li>
@@ -13,7 +13,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-4">
+    <div class="col-xl-4 col-lg-6 col-md-9 col-sm-12 h-center">
         <form id="choose-film" action="<c:url value="/film.do"/>" method="post">
             <input name="nSession" id="iSession" type="hidden" value=""/>
             <button type="submit" class="btn btn-primary pull-right">Выбрать</button>
